@@ -56,11 +56,12 @@ class lncomeTaxCalculator(object):
     def _user_she_bao(self, wages):
         she_bao = wages*(self.config.get_config('YangLao') \
                     + self.config.get_config('YiLiao')  \
-                    + self.config.get_config('YangLao') \
+#                    + self.config.get_config('YangLao') \
                     + self.config.get_config('ShiYe')  \
                     + self.config.get_config('GongShang') \
                     + self.config.get_config('ShengYu') \
-                    + self.config.get_config('GongJiJin'))
+                    + self.config.get_config('GongJiJin') \
+                    )
         return she_bao
 
     def user_tax(self, wages, she_bao):
