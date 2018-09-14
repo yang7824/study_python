@@ -54,7 +54,18 @@ class lncomeTaxCalculator(object):
         self.user = UserData(self.args.user_path)
 
     def _user_she_bao(self, wages):
-        she_bao = wages*(self.config.get_config('YangLao') \
+        if wages <= self.config.get_config('JiShuL'):
+            wages_jishu = self.config.get_config('JiShuL')
+
+        elif wages > self.config.get_config('JiShuL') and \
+             wages < self.config.get_config('JiShuH'):
+            wages_jishu = wages
+
+        elif wages >= self.config.get_config('JiShuH'):
+            wages_jishu = self.config.get_config('JiShuH')
+
+
+        she_bao = wages_jishu*(self.config.get_config('YangLao') \
                     + self.config.get_config('YiLiao')  \
 #                    + self.config.get_config('YangLao') \
                     + self.config.get_config('ShiYe')  \
@@ -116,6 +127,7 @@ class lncomeTaxCalculator(object):
                       format(tax, '.2f'), format(f_wages, '.2f')])
 
 #        print(result)
+        result.sort()
         return result
 
     def export(self, default = 'csv'):
